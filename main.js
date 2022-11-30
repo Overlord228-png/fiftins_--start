@@ -1,17 +1,34 @@
 
 let pole = document.querySelector(".pole")
 let btn = document.querySelector(".btn")
+let convaWin = document.querySelector("#conva")
 
+/// для перемешівания пятнашек
 btn.onclick = (e) => {
     /// Для рандома пятнашек
-    function createField(e) {
-        const mainArr = []
-        document.querySelector(".pole");
-        for (let i = 1; i < e*e; i++){
-            mainArr.push(i);
+    function getRandom (e) {
+        const poleArr = []
+        ///console.log(Math.floor(Math.random() * max)); -> проверял метод Math.random на понимание
+        for(let i = 0; i < pole.children.length ; i++){
+
+            if(pole.children[i].className == 'block__0'){
+
+                let leftBlock = pole.children[i-1] 
+                let rightBlock = pole.children[i+1]
+                let topBlock = pole.children[i-4]
+                let bottomBlock = pole.children[i+4]
+
+                if (leftBlock == block || rightBlock == block || bottomBlock == block || topBlock == block){
+                    success = true;
+                } else {
+                    success = false;
+                    break;
+                }
+            }
         }
     }
-    console.log(1)
+    console.log(Math.random())
+    ///console.log(1) -> проверка нажімаю ли я на кнопку
 }
 
 pole.onmousedown = (e) => {
@@ -76,6 +93,33 @@ pole.onmousedown = (e) => {
                 
                 document.onmousemove = null;
                 block.onmouseup = null;
+            }
+        }
+        // Проверка выиграл ли игрок
+        function won(poleArr) {
+            if (poleArr[poleArr.length - 1] !== "empty") return;
+            for (let i = 0; i < poleArr.length - 1; i++){
+                if (i + 1 == poleArr[i]){
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
+        // Анимация после победы
+        function animate(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#CC0013';
+            ctx.font = '40pt Arial';
+            ctx.fillText('Победа!', textX, 100, 300);
+            ctx.fillStyle = 'red';
+            ctx.strokeText('Победа!', textX, 100, 300);
+        
+            // 3 - move the shapes
+            textX = textX + speed;
+            if((textX + 300 > canvas.width) || (textX <= 0)){
+                speed = -speed;
             }
         }
     }
