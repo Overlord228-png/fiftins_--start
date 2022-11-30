@@ -1,23 +1,42 @@
 
 let pole = document.querySelector(".pole")
+let btn = document.querySelector(".btn")
+
+btn.onclick = (e) => {
+    /// Для рандома пятнашек
+    function createField(e) {
+        const mainArr = []
+        document.querySelector(".pole");
+        for (let i = 1; i < e*e; i++){
+            mainArr.push(i);
+        }
+    }
+    console.log(1)
+}
 
 pole.onmousedown = (e) => {
     if (e.target.className == 'block') {
         const block = e.target
-
         let success = false;
+
         for(let i = 0; i < pole.children.length ; i++){
+
             if(pole.children[i].className == 'block__0'){
+
                 let leftBlock = pole.children[i-1] 
                 let rightBlock = pole.children[i+1]
                 let topBlock = pole.children[i-4]
                 let bottomBlock = pole.children[i+4]
+
                 if (leftBlock == block || rightBlock == block || bottomBlock == block || topBlock == block){
                     success = true;
-                    break 
+                } else {
+                    success = false;
+                    break;
                 }
             }
         }
+
         if (success) {
             const emptyBlock = document.createElement('div');
             emptyBlock.className = 'empty';
@@ -59,46 +78,6 @@ pole.onmousedown = (e) => {
                 block.onmouseup = null;
             }
         }
-        
     }
 }
-
-
-
-
-/*
-/// Для рандома пятнашек
-function mixArr(arr){
-    let randIndex;
-    for (let i in arr) {
-        let x = arr[i];
-        randIndex = Math.floor(Math.random() * arr.length);
-        arr[i] = arr[randIndex];
-        arr[randIndex] = x;
-    }
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
