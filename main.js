@@ -6,28 +6,28 @@ let convaWin = document.querySelector("#conva")
 /// для перемешівания пятнашек
 btn.onclick = (e) => {
     /// Для рандома пятнашек
-    function getRandom (e) {
-        const poleArr = []
-        ///console.log(Math.floor(Math.random() * max)); -> проверял метод Math.random на понимание
-        for(let i = 0; i < pole.children.length ; i++){
-
-            if(pole.children[i].className == 'block__0'){
-
-                let leftBlock = pole.children[i-1] 
-                let rightBlock = pole.children[i+1]
-                let topBlock = pole.children[i-4]
-                let bottomBlock = pole.children[i+4]
-
-                if (leftBlock == block || rightBlock == block || bottomBlock == block || topBlock == block){
-                    success = true;
-                } else {
-                    success = false;
-                    break;
-                }
-            }
+    let getRandom = []
+    for (let i = 0; i < 15; i++) {
+        let randomNum = Math.round(1 - 0.5 + Math.random() * (15 - 1 + 1));
+        if(getRandom.includes(randomNum) == false){
+            getRandom.push(randomNum)
+        } else {
+            i--;
         }
     }
-    console.log(Math.random())
+
+    let firstBlock = pole.children[0]
+    let emptyBlock =  Array.from(pole.children).find(block=>block.textContent == '')
+    let nextEmpty = emptyBlock.nextElementSibling    
+
+    firstBlock.before(emptyBlock)
+    nextEmpty.before(firstBlock)
+
+    for (let i = 1; i < pole.children.length; i++) {
+        pole.children[i].textContent = getRandom[i-1]
+    }
+
+    console.log(getRandom)
     ///console.log(1) -> проверка нажімаю ли я на кнопку
 }
 
@@ -36,19 +36,29 @@ pole.onmousedown = (e) => {
         const block = e.target
         let success = false;
 
+        const breakLeftCoord = [4,8,12];
+        const breakRightCoord = [3,7,11];
+
         for(let i = 0; i < pole.children.length ; i++){
 
             if(pole.children[i].className == 'block__0'){
 
-                let leftBlock = pole.children[i-1] 
-                let rightBlock = pole.children[i+1]
+                let leftBlock;
+                let rightBlock;
+                
+                if(breakLeftCoord.includes(i) == false ){ //Проверить что нашей i нет в сломанных корд
+                    leftBlock = pole.children[i-1] 
+                } 
+                
+                if (breakRightCoord.includes(i) == false){
+                    rightBlock = pole.children[i+1]
+                }
+
                 let topBlock = pole.children[i-4]
                 let bottomBlock = pole.children[i+4]
 
                 if (leftBlock == block || rightBlock == block || bottomBlock == block || topBlock == block){
                     success = true;
-                } else {
-                    success = false;
                     break;
                 }
             }
@@ -95,7 +105,8 @@ pole.onmousedown = (e) => {
                 block.onmouseup = null;
             }
         }
-        // Проверка выиграл ли игрок
+        /*
+        /// Проверка выиграл ли игрок
         function won(poleArr) {
             if (poleArr[poleArr.length - 1] !== "empty") return;
             for (let i = 0; i < poleArr.length - 1; i++){
@@ -107,7 +118,7 @@ pole.onmousedown = (e) => {
             }
             return true;
         }
-        // Анимация после победы
+        /// Анимация после победы
         function animate(){
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#CC0013';
@@ -116,12 +127,13 @@ pole.onmousedown = (e) => {
             ctx.fillStyle = 'red';
             ctx.strokeText('Победа!', textX, 100, 300);
         
-            // 3 - move the shapes
+            /// 3 - move the shapes
             textX = textX + speed;
             if((textX + 300 > canvas.width) || (textX <= 0)){
                 speed = -speed;
             }
         }
+        */
     }
 }
 
