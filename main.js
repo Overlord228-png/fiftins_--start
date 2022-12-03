@@ -105,12 +105,10 @@ pole.onmousedown = (e) => {
                 block.onmouseup = null;
             }
         }
-        /*
         /// Проверка выиграл ли игрок
-        function won(poleArr) {
-            if (poleArr[poleArr.length - 1] !== "empty") return;
-            for (let i = 0; i < poleArr.length - 1; i++){
-                if (i + 1 == poleArr[i]){
+        function winGame(pole) {
+            for(let i = 0; i < pole.children.length - 1; i++){
+                if(i + 1 == pole.children[i].length){
                     continue;
                 } else {
                     return false;
@@ -119,21 +117,11 @@ pole.onmousedown = (e) => {
             return true;
         }
         /// Анимация после победы
-        function animate(){
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#CC0013';
-            ctx.font = '40pt Arial';
-            ctx.fillText('Победа!', textX, 100, 300);
-            ctx.fillStyle = 'red';
-            ctx.strokeText('Победа!', textX, 100, 300);
-        
-            /// 3 - move the shapes
-            textX = textX + speed;
+        function animation() {
             if((textX + 300 > canvas.width) || (textX <= 0)){
                 speed = -speed;
             }
         }
-        */
     }
 }
 
