@@ -1,7 +1,6 @@
 
 let pole = document.querySelector(".pole")
 let btn = document.querySelector(".btn")
-let convaWin = document.querySelector("#conva")
 
 /// для перемешівания пятнашек
 btn.onclick = (e) => {
@@ -103,23 +102,6 @@ pole.onmousedown = (e) => {
                 
                 document.onmousemove = null;
                 block.onmouseup = null;
-            }
-        }
-        /// Проверка выиграл ли игрок
-        function winGame(pole) {
-            for(let i = 0; i < pole.children.length - 1; i++){
-                if(i + 1 == pole.children[i].length){
-                    continue;
-                } else {
-                    return false;
-                }
-            }
-            return true;
-        }
-        /// Анимация после победы
-        function animation() {
-            if((textX + 300 > canvas.width) || (textX <= 0)){
-                speed = -speed;
             }
         }
     }
