@@ -68,8 +68,16 @@ body {
 }
 
 
+.Win{
+    font-family: "Ubuntu";
+    font-size: 32px;
+    color: red;
+}
 
-
-
+.gameWin{
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
 
 

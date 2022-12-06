@@ -1,6 +1,11 @@
 
 let pole = document.querySelector(".pole")
 let btn = document.querySelector(".btn")
+let gawin = document.querySelector(".gameWin")
+
+var leftOffset = 0;
+var topOffset = 0;
+var dir = "right"
 
 /// для перемешівания пятнашек
 btn.onclick = (e) => {
@@ -102,6 +107,20 @@ pole.onmousedown = (e) => {
                 
                 document.onmousemove = null;
                 block.onmouseup = null;
+
+
+                const winsComb = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','']
+
+                let win = true
+                for(let i = 0; i <pole.children.length; i++) {
+                    if(pole.children[i].innerHTML != winsComb[i]){
+                        win = false;
+                        break;
+                    }
+                }
+                if (win == true) {
+                    gawin.style.display = "flex";
+                }
             }
         }
     }
