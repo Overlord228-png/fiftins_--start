@@ -4,3 +4,4 @@
 30/11/22 (part 2) -> add new functional;
 01/12/22 -> bug fixes with spots (it was possible to rearrange the previous number (not now)), added a button with a randomizer for numbers;
 05/12/22 -> finish;
+06/12/22 -> final finish.
